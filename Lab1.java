@@ -28,7 +28,7 @@ public class Lab1{
                         break;
                 }
             }
-            catch(Exception ex){
+            catch(InputMismatchException ex){
                 System.out.println(ex);
             }
         }
@@ -49,25 +49,28 @@ public class Task{
         }
     }
     public void task2(){
-        System.out.println("Enter String: ");
+        System.out.println("\nEnter String: ");
         String string = task_scan.nextLine();
+        System.out.println("");
         for(int i = string.length()-1; i>=0; --i){
             System.out.print(string.charAt(i));
-        } 
+        }
+        System.out.println("");
     }
     public void task3(){
         int prev = 0;
         int cur = 1;
         int fut;
-        System.out.println("Iterations: ");
+        System.out.println("\nIterations: ");
         int iter = task_scan.nextInt();
+        System.out.println("");
         for (int i = 1; i <= iter; i++){
-            System.out.print(" " + cur);
+            System.out.print(cur + " ");
             fut = cur + prev;
             prev = cur;
             cur = fut;
-            
         }
+        System.out.println("");
     }
     public void task4(){
         int[] numbers = new int[3];
@@ -80,7 +83,7 @@ public class Task{
             System.out.print(a + " ");
         }
         System.out.println("");
-        int arr_min=0;
+        int arr_min=numbers[0];
         for(int cur_arr : numbers){
             if(arr_min>cur_arr)arr_min=cur_arr;
         }
@@ -91,6 +94,5 @@ public class Task{
             if(numbers[0]%i==0 && numbers[1]%i==0 && numbers[2]%i==0)max_multiplier=i;
         }
         System.out.println("Max multiplier: " + max_multiplier);
-    
     }
 }
