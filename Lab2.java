@@ -87,7 +87,7 @@ public class Task2 extends Lab2{
         int[][] tmp_matrix = new int[matrix_size][matrix_size];
         for(int i = 0; i < matrix_size; i++){
             for(int j = 0; j<matrix_size; j++){
-                System.out.printf("[%i][%i]: ", i, j);
+                System.out.printf("\n[%i][%i]: ", i, j);
                 tmp_matrix[i][j] = scan.nextInt();
             }
         }
