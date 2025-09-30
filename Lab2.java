@@ -73,7 +73,7 @@ public class Task2{
     }
     public static void printMatrix(int[][] matrix) {
         System.out.println();
-        for (int[] row : matrix) {
+        for (int[] row : matrix){
             for (int element : row) {
                 System.out.print(element + " ");
             }
