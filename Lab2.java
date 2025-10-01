@@ -4,15 +4,15 @@ public class Lab2{
     public static void main(String[] args){
         int userChoice;
         while(true){
-            System.out.println("\n1 - Task 1\n2 - Task 2\n3 - Exit Program");
+            System.out.println("\n1 - Task 1\n2 - Task 2\n3 - Exit Program\nChoice: ");
             userChoice = scan.nextInt();
             try{
                 switch(userChoice){
                     case 1:
-                        Task1.task1_main();
+                        Task1.main();
                         break;
                     case 2:
-                        Task2.task2_main();
+                        Task2.main();
                         break;
                     case 3:
                         return;
@@ -29,7 +29,7 @@ public class Lab2{
 }
 public class Task1{
     static Scanner scan = new Scanner(System.in);
-    public static void task1_main(){
+    public static void main(){
         System.out.println("Enter a number: ");
         long number = scan.nextLong();
         System.out.println("Number " + number + ": " + isUnique(number));
@@ -52,7 +52,7 @@ public class Task1{
 }
 public class Task2{
     static Scanner scan = new Scanner(System.in);
-    static void task2_main(){
+    public static void main(){
         System.out.println("Task 2:\n");
         System.out.println("Enter matrix size(NxN): ");
         int matrix_size = scan.nextInt();
