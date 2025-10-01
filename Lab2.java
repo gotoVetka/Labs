@@ -36,9 +36,9 @@ public class Task1{
     }
     static boolean isUnique(long number){
         String str_number = intToString(number);
-        // System.out.println("Length: " + str_number.length());
-        for(int outer_i=0; outer_i < str_number.length(); outer_i++){
-            for(int inner_i=outer_i+1; inner_i < str_number.length();inner_i++){
+        int str_len = str_number.length();
+        for(int outer_i=0; outer_i < str_len-1; outer_i++){
+            for(int inner_i=outer_i+1; inner_i < str_len;inner_i++){
                 if(str_number.charAt(outer_i)==str_number.charAt(inner_i)){
                     return false;
                 }
