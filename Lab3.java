@@ -47,7 +47,25 @@ public class Auto{
         return mileage;
     }
 
-    public void 
+    public void setMark(String newMark){
+        this.mark = newMark;
+    }
+    
+    public void setDiesel(boolean newStatus){
+        this.isDiesel = newStatus;
+    }
+
+    public void setPower(int newPower){
+        this.power = newPower;
+    }
+
+    public void setCarWeight(float newCarWeight){
+        this.carWeight = newCarWeight;
+    }
+
+    public void setMileage(float newMileage){
+        this.mileage = newMileage;
+    }
 
     public void getGeneralInfo(){
         System.out.println("General Car Info:");
@@ -80,6 +98,15 @@ public class LightCar extends Auto{
     public float getAcceleration(){
         return acceleration;
     }
+
+    public void setPer(float newPer){
+        this.per100km = newPer;
+    }
+
+    public void setAcceleration(float newAcceleration){
+        this.acceleration = newAcceleration;
+    }
+
     public void getLightCarInfo(){
         this.getGeneralInfo();
         System.out.println("Light Car Info: ");
