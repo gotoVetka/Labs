@@ -3,10 +3,15 @@ public class Lab3 {
 
     static Scanner scan = new Scanner(System.in);
     public static void main(String[] args){
-
+        HeavyAuto truck = new HeavyAuto();
+        LightAuto tesla = new LightAuto();
+        Auto focus = new Auto();
+        truck.getHeavyAutoInfo();
+        tesla.getLightAutoInfo();
+        focus.getGeneralInfo();
     }
 }
-
+//package Auto;
 public class Auto{
 
     protected String mark;
@@ -50,7 +55,7 @@ public class Auto{
     public void setMark(String newMark){
         this.mark = newMark;
     }
-    
+
     public void setDiesel(boolean newStatus){
         this.isDiesel = newStatus;
     }
@@ -59,8 +64,8 @@ public class Auto{
         this.power = newPower;
     }
 
-    public void setCarWeight(float newCarWeight){
-        this.carWeight = newCarWeight;
+    public void setCarWeight(float newWeight){
+        this.carWeight = newWeight;
     }
 
     public void setMileage(float newMileage){
@@ -77,18 +82,18 @@ public class Auto{
     }
 }
 
-public class LightCar extends Auto{
+public class LightAuto extends Auto{
 
     protected float per100km;
     protected float acceleration;
 
-    public LightCar(String mark, boolean isDiesel, int power, float carWeight, float mileage, float per100km, float acceleration){
+    public LightAuto(String mark, boolean isDiesel, int power, float carWeight, float mileage, float per100km, float acceleration){
         super(mark, isDiesel, power, carWeight, mileage);
         this.per100km = per100km;
         this.acceleration = acceleration;
     }
 
-    public LightCar(){
+    public LightAuto(){
     }
 
     public float getPer100km(){
@@ -99,7 +104,7 @@ public class LightCar extends Auto{
         return acceleration;
     }
 
-    public void setPer(float newPer){
+    public void setPer100km(float newPer){
         this.per100km = newPer;
     }
 
@@ -107,7 +112,7 @@ public class LightCar extends Auto{
         this.acceleration = newAcceleration;
     }
 
-    public void getLightCarInfo(){
+    public void getLightAutoInfo(){
         this.getGeneralInfo();
         System.out.println("Light Car Info: ");
         System.out.println("Per 100 km: " + per100km);
@@ -115,21 +120,27 @@ public class LightCar extends Auto{
     }
 }
 
-public class HeavyCar extends Auto{
+public class HeavyAuto extends Auto{
 
     float maxCargoWeight;
-    public HeavyCar(String mark, boolean isDiesel, int power, float carWeight, float mileage, float maxCargoWeight){
+    public HeavyAuto(String mark, boolean isDiesel, int power, float carWeight, float mileage, float maxCargoWeight){
         super(mark, isDiesel, power, carWeight, mileage);
         this.maxCargoWeight = maxCargoWeight;
     }
-    public HeavyCar(){
+
+    public HeavyAuto(){
 
     }
-    public float getMaxWeight() {
+
+    public float getCargoWeight() {
         return maxCargoWeight;
     }
 
-    public void getHeavyCarInfo(){
+    public void setMaxCargoWeight(float newMaxCargoWeight){
+        this.maxCargoWeight = newMaxCargoWeight;
+    }
+
+    public void getHeavyAutoInfo(){
         this.getGeneralInfo();
         System.out.println("Heavy Car Info: " + maxCargoWeight);
     }
