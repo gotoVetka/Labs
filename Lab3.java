@@ -3,12 +3,12 @@ public class Lab3 {
 
     static Scanner scan = new Scanner(System.in);
     public static void main(String[] args){
- 	// HeavyAuto truck = new HeavyAuto();
-        // LightAuto tesla = new LightAuto();
-        // Auto focus = new Auto();
-        // truck.getHeavyAutoInfo();
-        // tesla.getLightAutoInfo();
-        // focus.getGeneralInfo();
+ 	    HeavyAuto truck = new HeavyAuto();
+        LightAuto tesla = new LightAuto();
+        Auto focus = new Auto();
+        truck.getHeavyAutoInfo();
+        tesla.getLightAutoInfo();
+        focus.getGeneralInfo();
     }
 }
 //package Auto;
