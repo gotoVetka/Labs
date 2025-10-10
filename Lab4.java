@@ -5,7 +5,7 @@ public class Lab4{
 
     } 
 }
-
+//shot
 //package Task
 public class Task{
     public void print(){}
