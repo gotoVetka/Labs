@@ -74,19 +74,18 @@ public class Task{
     }
     public void task4(){
         int[] numbers = new int[3];
+        int arr_min=numbers[0];
         for(int i = 0; i < numbers.length; i++){
             System.out.print("\n: " );
             numbers[i] = task_scan.nextInt();
+            if(numbers[i]<arr_min)arr_min=numbers[i];
+
         }
         System.out.println("Array: ");
-        for(int a : numbers){
-            System.out.print(a + " ");
+        for(int arr : numbers){
+            System.out.print(arr + " ");
         }
         System.out.println("");
-        int arr_min=numbers[0];
-        for(int cur_arr : numbers){
-            if(arr_min>cur_arr)arr_min=cur_arr;
-        }
         System.out.println("Minimun: " + arr_min);
         int max_multiplier = 0;
         arr_min = Math.abs(arr_min);
