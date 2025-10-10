@@ -8,5 +8,6 @@ public class Lab4{
 
 //package Task
 public class Task{
-    
+    public void print(){}
+    public void set(){}
 }
