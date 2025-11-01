@@ -36,7 +36,7 @@ public class Task1{
     }
     static boolean isUnique(long number){
         HashMap<Character, Integer> letters = new HashMap<Character, Integer>();
-        String str_number = intToString(number);
+        String str_number = ToString(number);
         int str_len = str_number.length();
         for(int i=0; i <= str_len-1; i++){
             if(letters.containsKey(str_number.charAt(i))){
@@ -46,7 +46,7 @@ public class Task1{
         }
         return true;
     }
-    static String intToString(long number){
+    static String ToString(Object... number){
         return "" + number;
     }
 }
