@@ -2,56 +2,18 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.*;
 import java.util.*;
+import java.util.regex.Pattern;
 
 public class Lab5{
     public static void main(String[] args) {
-        String inputPath = "input.txt";
-        String outputPath = "output.txt";
-
-        List<Teapot> list = new ArrayList<>();
-
-        // Чтение txt (brand, power, avgWorkTime, usingCost)
-        try (BufferedReader br = Files.newBufferedReader(Paths.get(inputPath), StandardCharsets.UTF_8)) {
-            String line;
-            int lineNo = 0;
-            while ((line = br.readLine()) != null) {
-                lineNo++;
-                line = line.trim();
-                if (line.isEmpty()) continue;
-                // Разделие по запятой, допускаем простую txt без кавычек
-                String[] parts = line.split(",", -1);
-                if (parts.length < 3) {
-                    System.err.println("Пропущено поле в строке " + lineNo + ": " + line);
-                    continue;
-                }
-                try {
-                    String brand = parts[0].trim();
-                    int power = Integer.parseInt(parts[1].trim());
-                    int avgWorkTime = Integer.parseInt(parts[2].trim());
-                    int usingCost = Integer.parseInt(parts[3].trim());
-                    list.add(new Teapot(brand, power, avgWorkTime, usingCost));
-                } catch (NumberFormatException ex) {
-                    System.err.println("Ошибка парсинга в строке " + lineNo + ": " + line);
-                }
-            }
-        } catch (IOException exception) {
-            System.err.println("Ошибка при чтении файла: " + exception.getMessage());
-            return;
-        }
-
-        // Сортировка (Comparable реализован в Teapot)
-        Collections.sort(list);
-
-        // Запись в удобочитаемом формате
-        try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(outputPath), StandardCharsets.UTF_8)) {
-            for (Teapot teapot : list) {
-                bw.write(teapot.toString());
-                bw.newLine();
-            }
-            System.out.println("Результат записан в " + outputPath);
-        } catch (IOException e) {
-            System.err.println("Ошибка при записи файла: " + e.getMessage());
-        }
+        String input = "input.txt";
+        String output = "output.txt";
+        CReader reader = new CReader(input);
+        CWriter writer = new CWriter(output);
+        CParser parser = new CParser("^[A-Za-z]+\\|\\d+\\|\\d+\\|\\d+$");
+        ArrayList<String> strings = reader.readLines();
+        ArrayList<Teapot> teapots = parser.parseTeapots(strings);
+        writer.writeToFile(output, teapots);
     }
 }
 
@@ -102,13 +64,6 @@ public class Teapot{
     }
 
     @Override
-    public int compareTo(Teapot other) {
-        if (other == null) return 1;
-        // Сортировка по возрастанию текстового поля name (лексикографически, с учетом локали JVM)
-        return this.brand.compareTo(other.brand);
-    }
-
-    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -128,9 +83,77 @@ public class Teapot{
     
     @Override
     public String toString() {
-        return "Teapot [brand=" + brand + ", power=" + power + ", avgWorkTime=" + avgWorkTime + ", usingCost="
-                + usingCost + "]";
+        return brand + "|" + power + "|" + avgWorkTime + "|" + 
+                + usingCost;
     }
     
 
+}
+
+//package Reader
+public class CReader {
+  private static String filename;
+
+  public CReader(String inputFile){
+    filename = inputFile;
+  }
+
+  public ArrayList<String> readLines(){
+    ArrayList<String> strings = new ArrayList<>();
+    if(filename.isBlank()){
+      return strings;
+    }
+    try(BufferedReader reader = Files.newBufferedReader(Paths.get(filename), StandardCharsets.UTF_8)){
+      String line;
+      while ((line = reader.readLine()) != null) {
+        strings.add(line);
+      }
+    } catch (IOException exception){
+      System.err.println("Ошибка при записи файла: " + exception.getMessage());
+    }
+    return strings;
+  }
+}
+
+
+//package CWriter
+public class CWriter {
+  private static String output;
+
+  public CWriter(String filename){
+    output = filename;
+  }
+
+  public void writeToFile(String filename, ArrayList<Teapot> objList){
+    try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(output), StandardCharsets.UTF_8)) {
+      for (Teapot obj : objList) {
+        bw.write(obj.toString());
+        bw.newLine();
+      }
+      System.out.println("Результат записан в " + output);
+    } catch (IOException e) {
+       System.err.println("Ошибка при записи файла: " + e.getMessage());
+    }
+  }
+}
+
+//package CParser
+public class CParser{
+  private static String stringPatternRegex;
+
+  public CParser(String regex){
+
+    stringPatternRegex = regex;
+  }
+
+  public ArrayList<Teapot> parseTeapots(ArrayList<String> strings){
+    Pattern pattern = Pattern.compile(stringPatternRegex);
+    ArrayList<Teapot> teapots = new ArrayList<>();
+    strings.removeIf(string -> !pattern.matcher(string).matches());
+    for(String line : strings){
+      String[] params = line.split("\\|");
+      teapots.add(new Teapot(params[0], Integer.parseInt(params[1]), Integer.parseInt(params[2]), Integer.parseInt(params[3])));
+    }
+    return teapots;
+  }
 }
