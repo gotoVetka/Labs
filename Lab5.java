@@ -13,7 +13,10 @@ public class Lab5{
         CParser parser = new CParser("^[A-Za-z]+\\|\\d+\\|\\d+\\|\\d+$");
         ArrayList<String> strings = reader.readLines();
         ArrayList<Teapot> teapots = parser.parseTeapots(strings);
+        teapots.stream().forEach(string -> System.out.println(string));
         teapots.sort(CComparator.BY_BRAND);
+        System.out.println("After sorting by brand");
+        teapots.stream().forEach(string -> System.out.println(string));
         writer.writeToFile(output, teapots);
     }
 }
