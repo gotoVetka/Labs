@@ -13,6 +13,7 @@ public class Lab5{
         CParser parser = new CParser("^[A-Za-z]+\\|\\d+\\|\\d+\\|\\d+$");
         ArrayList<String> strings = reader.readLines();
         ArrayList<Teapot> teapots = parser.parseTeapots(strings);
+        teapots.sort(CComparator.BY_BRAND);
         writer.writeToFile(output, teapots);
     }
 }
@@ -90,7 +91,7 @@ public class Teapot{
 
 }
 
-//package Reader
+//package CReader
 public class CReader {
   private static String filename;
 
@@ -155,5 +156,33 @@ public class CParser{
       teapots.add(new Teapot(params[0], Integer.parseInt(params[1]), Integer.parseInt(params[2]), Integer.parseInt(params[3])));
     }
     return teapots;
+  }
+}
+
+//package CComparotor
+public enum CComparator implements Comparator<Teapot> {
+  BY_BRAND{
+    @Override
+    public int compare(Teapot t1, Teapot t2){
+      return t1.getBrand().compareTo(t2.getBrand());
+    }
+  },
+  BY_AVG_TIME{
+    @Override
+    public int compare(Teapot t1, Teapot t2){
+      return Integer.compare(t1.getAvgWorkTime(), t2.getAvgWorkTime());
+    }
+  },
+  BY_POWER{
+    @Override
+    public int compare(Teapot t1, Teapot t2){
+      return Integer.compare(t1.getPower(), t2.getPower());
+    }
+  },
+  BY_USING_COST{
+    @Override
+    public int compare(Teapot t1, Teapot t2){
+      return Integer.compare(t1.getUsingCost(), t2.getUsingCost());
+    }
   }
 }
