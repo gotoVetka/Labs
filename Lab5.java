@@ -128,7 +128,7 @@ public class CWriter {
     output = filename;
   }
 
-  public void writeToFile(String filename, ArrayList<Teapot> objList){
+  public void writeToFile(ArrayList<Teapot> objList){
     try (BufferedWriter bw = Files.newBufferedWriter(Paths.get(output), StandardCharsets.UTF_8)) {
       for (Teapot obj : objList) {
         bw.write(obj.toString());
