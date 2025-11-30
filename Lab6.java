@@ -8,7 +8,7 @@ public class Lab6{
   public static void main(String[] args) {
     CReader reader = new CReader("input.txt");
     CWriter writer = new CWriter("output.txt");
-    CParser parser = new CParser("^d+\\|\\s+\\|\\s+\\|\\d+$");
+    CParser parser = new CParser("\\d+\\|\\w+\\|\\w+\\|\\d+");
     ArrayList<String> strings = reader.readLines();
     strings.forEach(System.out::println);
     ArrayList<Computer> computers = parser.parseComputers(strings);
@@ -134,8 +134,7 @@ public class CParser{
     Pattern pattern = Pattern.compile(stringPatternRegex);
     String[] params;
     ArrayList<Computer> computers = new ArrayList<>();
-
-
+    strings.removeIf(string -> !pattern.matcher(string).matches());
     for( String line : strings ){
       params = line.split("\\|");
       computers.add(new Computer(Integer.parseInt(params[0]), params[1], params[2], Integer.parseInt(params[3])));
