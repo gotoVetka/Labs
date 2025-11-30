@@ -8,7 +8,7 @@ public class Lab6{
   public static void main(String[] args) {
     CReader reader = new CReader("input.txt");
     CWriter writer = new CWriter("output.txt");
-    CParser parser = new CParser("\\d+\\|\\w+\\|\\w+\\|\\d+");
+    CParser parser = new CParser("^\\d+\\|\\w+\\|\\w+\\|\\d+$");
     ArrayList<String> strings = reader.readLines();
     strings.forEach(System.out::println);
     ArrayList<Computer> computers = parser.parseComputers(strings);
@@ -163,7 +163,7 @@ public enum CComparator implements Comparator<Computer> {
       return c1.getGpu().compareTo(c2.getGpu());
     }
   },
-  BY_PRODACTION{
+  BY_PRODUCTION{
     @Override
     public int compare(Computer c1, Computer c2){
       return Integer.compare(c1.getProduction(), c2.getProduction());
